@@ -1,4 +1,4 @@
-console.log('Content script loaded');
+console.log('Popup script loaded');
 
 const enableToggle = document.getElementById('enableToggle');
 const speedInput = document.getElementById('speedInput');
@@ -6,7 +6,7 @@ const speedInput = document.getElementById('speedInput');
 chrome.storage.sync.get(['enabled', 'speed'],  (results) => {
 
     enableToggle.checked = results.enabled ?? false;
-    speedInput.value = results.speed ?? 1.00;
+    speedInput.value = results.speed ?? 1.75;
     console.log(results.enabled);
     console.log(results.speed);
 })
