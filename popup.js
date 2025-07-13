@@ -1,26 +1,26 @@
-console.log('Popup script loaded');
+// console.log('Popup script loaded');
 
-const enableToggle = document.getElementById('enableToggle');
-const speedInput = document.getElementById('speedInput');
+// const enableToggle = document.getElementById('enableToggle');
+// const speedInput = document.getElementById('speedInput');
 
-chrome.storage.sync.get(['enabled', 'speed'],  (results) => {
+// chrome.storage.sync.get(['enabled', 'speed'],  (results) => {
 
-    enableToggle.checked = results.enabled ?? false;
-    speedInput.value = results.speed ?? 1.75;
-    console.log(results.enabled);
-    console.log(results.speed);
-})
+//     enableToggle.checked = results.enabled ?? false;
+//     speedInput.value = results.speed ?? 1.75;
+//     console.log(results.enabled);
+//     console.log(results.speed);
+// })
 
-enableToggle.addEventListener('change', () => {
+// enableToggle.addEventListener('change', () => {
     
-    const isEnabled = enableToggle.checked;
-    console.log(isEnabled);
-    chrome.storage.sync.set({ enabled: isEnabled });
-  });
+//     const isEnabled = enableToggle.checked;
+//     console.log(isEnabled);
+//     chrome.storage.sync.set({ enabled: isEnabled });
+//   });
 
-speedInput.addEventListener('input', () => {
-    const newSpeed = parseFloat(speedInput.value)
-    console.log(newSpeed);
-    chrome.storage.sync.set({speed: newSpeed})
-});
+// speedInput.addEventListener('input', () => {
+//     const newSpeed = parseFloat(speedInput.value)
+//     console.log(newSpeed);
+//     chrome.storage.sync.set({speed: newSpeed})
+// });
 

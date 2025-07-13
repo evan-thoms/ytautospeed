@@ -16,6 +16,7 @@ waitForVideo((video) => {
         const speed = results.speed ?? 1.75;
         video.playbackRate = speed; 
       });
+    
   const parent = video.parentElement;
   if (getComputedStyle(parent).position === 'static') {
     parent.style.position = 'relative';
@@ -23,6 +24,14 @@ waitForVideo((video) => {
 
   const container = document.createElement('div');
   container.id = 'yt-speed-control';
+
+  // ✅ ✅ ✅ ADD THIS HERE — detect overlays
+  const infoButton = document.querySelector('.ytp-cards-button-icon');
+  const moreActionsButton = document.querySelector('.ytp-more-options-button');
+  if (infoButton || moreActionsButton) {
+    container.style.top = '40px'; // move it down if overlaps
+    container.style.right = '12px';
+  }
 
   container.innerHTML = `
     <div id="yt-unified-square">
@@ -41,11 +50,13 @@ waitForVideo((video) => {
 
   parent.appendChild(container);
 
+  
+
   const style = document.createElement('style');
   style.textContent = `
     #yt-speed-control {
       position: absolute;
-      top: 15px;
+      top: 40px;
       right: 15px;
       z-index: 9999;
     }
@@ -364,6 +375,20 @@ waitForVideo((video) => {
     const newRate = video.playbackRate;
     speedSlider.value = newRate.toFixed(2);
     sliderValue.textContent = newRate.toFixed(2);
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement) {
+      container.style.position = 'fixed';  // ✅ Pin to viewport
+      container.style.top = '60px';
+      container.style.bottom = 'auto';
+      container.style.right = '15px';
+    } else {
+      container.style.position = 'absolute';  // ✅ Back inside parent
+      container.style.top = '40px'; 
+      container.style.bottom = 'auto';
+      container.style.right = '12px';
+    }
   });
 
   let lastUrl = location.href;
